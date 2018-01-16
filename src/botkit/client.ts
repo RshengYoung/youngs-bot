@@ -18,7 +18,7 @@ export class Client {
         integration.connect()
         this.integrations.push(integration)
         const path: string = `/webhook/${integration.serverName()}`
-        console.log(`Server: ${path}`)
+        console.log(`Server: ${path}, sessionId: ${integration.getSessionId()}`)
         this.app.use(path, integration.getRouter())
         return this
     }

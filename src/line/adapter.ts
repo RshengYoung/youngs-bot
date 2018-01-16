@@ -14,7 +14,8 @@ export class LineAdapter extends Adapter {
 
     constructor(private config: Config) {
         super()
-        this.parser = new LineParser(this.serverName(), uuid.v4())
+        this.sessionId = uuid.v4()
+        this.parser = new LineParser(this.serverName(), this.sessionId)
         this.client = new Line.Client({
             channelSecret: config.secret,
             channelAccessToken: config.token
@@ -57,7 +58,7 @@ export class LineAdapter extends Adapter {
         router.post("/", (req, res, next) => {
             const events = req.body.events as Array<any>
             events.forEach(event => this.emitter.emit("message", event))
-            res.status(200).send("OK")
+            res.status(200).end()
         })
         return router
     }

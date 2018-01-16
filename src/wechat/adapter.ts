@@ -15,7 +15,8 @@ export class WechatAdapter extends Adapter {
 
     constructor(private config: Config) {
         super()
-        this.parser = new WechatParser(this.serverName(), uuid.v4())
+        this.sessionId = uuid.v4()
+        this.parser = new WechatParser(this.serverName(), this.sessionId)
         this.client = new Wechat(config.id, config.secret)
     }
 

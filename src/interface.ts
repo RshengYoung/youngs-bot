@@ -20,6 +20,11 @@ export abstract class Adapter {
         return this.router
     }
 
+    getSessionId(): string {
+        return this.sessionId
+    }
+
+    protected sessionId: string
     protected parser: Parser
     protected emitter: EventEmitter
     protected router: Router
